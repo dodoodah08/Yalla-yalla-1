@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yalla Yalla Pizzeria – Sefton, Sydney</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a4a2e;
+    --green-mid: #2d6a45;
+    --green-bright: #3d8b5a;
+    --gold: #c8a96e;
+    --gold-light: #e8d5a3;
+    --red: #c0392b;
+    --cream: #faf6ef;
+    --warm-white: #fffdf9;
+    --text-dark: #1c1c1c;
+    --text-mid: #4a4a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(26,74,46,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-weight: 700;
+    font-size: 1.5rem; color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--gold-light); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--green-deep);
+    padding: 10px 24px; border-radius: 2px;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--green-deep);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    flex-direction: column; text-align: center;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 20% 60%, rgba(61,139,90,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 30%, rgba(200,169,110,0.1) 0%, transparent 55%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(200,169,110,0.06) 80px);
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 24px; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px;
+    border: 1px solid rgba(200,169,110,0.4);
+    padding: 6px 18px; border-radius: 1px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 900; line-height: 0.9;
+    color: var(--warm-white);
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--gold);
+    display: block;
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.5rem;
+    color: rgba(255,255,255,0.6); margin-top: 20px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-info {
+    display: flex; gap: 40px; justify-content: center;
+    margin-top: 52px; flex-wrap: wrap;
+    animation: fadeUp 1s 0.35s ease both;
+  }
+  .hero-info-item { text-align: center; }
+  .hero-info-item .label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(200,169,110,0.7); display: block; margin-bottom: 6px;
+  }
+  .hero-info-item .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--warm-white);
+  }
+  .hero-rating { display: flex; align-items: center; gap: 8px; justify-content: center; }
+  .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+  .hero-divider {
+    width: 1px; height: 60px; background: rgba(200,169,110,0.25);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    color: rgba(200,169,110,0.5); font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(200,169,110,0.5), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--green-deep);
+    margin-bottom: 48px;
+  }
+  .section-title em { font-style: italic; color: var(--green-mid); }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: var(--green-deep);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; padding: 0;
+  }
+  .about-text {
+    padding: 80px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-text .section-label { color: var(--gold); }
+  .about-text .section-title { color: var(--warm-white); }
+  .about-text p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem; line-height: 1.8;
+    max-width: 440px; margin-bottom: 32px;
+  }
+  .about-pillars {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 12px;
+  }
+  .pillar { border-left: 2px solid var(--gold); padding-left: 16px; }
+  .pillar .p-label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 4px;
+  }
+  .pillar .p-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--warm-white);
+  }
+  .about-visual {
+    background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-bright) 100%);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 420px; position: relative; overflow: hidden;
+  }
+  .about-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(200,169,110,0.2) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(26,74,46,0.4) 0%, transparent 50%);
+  }
+  .pizza-icon {
+    font-size: 8rem; z-index: 1; position: relative;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+    animation: float 4s ease-in-out infinite;
+  }
+  .about-badge {
+    position: absolute; bottom: 32px; right: 32px; z-index: 2;
+    background: var(--gold); color: var(--green-deep);
+    padding: 16px 24px; border-radius: 2px;
+    text-align: center;
+  }
+  .about-badge .big { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; display: block; }
+  .about-badge .sm { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* ── MENU ── */
+  .menu-section { background: var(--warm-white); padding-bottom: 120px; }
+  .menu-section .inner { max-width: 1100px; margin: 0 auto; }
+  .menu-tabs {
+    display: flex; gap: 0; margin-bottom: 60px;
+    border-bottom: 2px solid rgba(26,74,46,0.1);
+    overflow-x: auto; padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-mid); font-weight: 500;
+    border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .tab-btn.active {
+    color: var(--green-deep);
+    border-bottom-color: var(--gold);
+  }
+  .tab-btn:hover { color: var(--green-deep); }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px; background: rgba(26,74,46,0.06);
+  }
+  .menu-item {
+    background: var(--warm-white);
+    padding: 28px 32px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+  }
+  .menu-item:hover {
+    background: #fff;
+    border-color: rgba(200,169,110,0.3);
+    z-index: 1; position: relative;
+  }
+  .item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--green-deep); margin-bottom: 8px;
+  }
+  .item-desc {
+    font-size: 0.82rem; color: var(--text-mid);
+    line-height: 1.65; flex: 1; margin-bottom: 16px;
+  }
+  .item-footer { display: flex; justify-content: space-between; align-items: center; }
+  .item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--green-mid); font-weight: 700;
+  }
+  .item-tag {
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(200,169,110,0.15); color: var(--gold);
+    padding: 4px 10px; border-radius: 1px;
+  }
+
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+
+  /* ── HIGHLIGHTS ── */
+  .highlights { background: var(--cream); }
+  .highlights .inner { max-width: 1100px; margin: 0 auto; }
+  .highlights-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background: rgba(26,74,46,0.08);
+  }
+  .highlight-card {
+    background: var(--warm-white);
+    padding: 48px 40px; text-align: center;
+    transition: background 0.25s;
+  }
+  .highlight-card:hover { background: var(--green-deep); }
+  .highlight-card:hover .h-icon,
+  .highlight-card:hover .h-title,
+  .highlight-card:hover .h-desc { color: var(--warm-white); }
+  .highlight-card:hover .h-title { color: var(--gold); }
+  .h-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; transition: color 0.25s; }
+  .h-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--green-deep); margin-bottom: 12px; transition: color 0.25s;
+  }
+  .h-desc {
+    font-size: 0.88rem; color: var(--text-mid);
+    line-height: 1.7; transition: color 0.25s;
+  }
+
+  /* ── REVIEWS ── */
+  .reviews-section {
+    background: var(--green-deep);
+    padding: 100px 48px;
+  }
+  .reviews-section .inner { max-width: 1100px; margin: 0 auto; }
+  .reviews-section .section-title { color: var(--warm-white); }
+  .reviews-section .section-label { color: var(--gold); }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+    background: rgba(255,255,255,0.06);
+  }
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    padding: 36px 32px;
+    border: 1px solid rgba(200,169,110,0.1);
+  }
+  .review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 16px; }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.08rem;
+    color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 24px;
+  }
+  .review-author {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.7;
+  }
+
+  /* ── INFO STRIP ── */
+  .info-strip {
+    background: var(--gold);
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 0;
+  }
+  .info-block {
+    padding: 48px 36px; border-right: 1px solid rgba(26,74,46,0.15);
+    text-align: center;
+  }
+  .info-block:last-child { border-right: none; }
+  .info-icon { font-size: 1.8rem; display: block; margin-bottom: 12px; }
+  .info-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(26,74,46,0.6); display: block; margin-bottom: 6px;
+  }
+  .info-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700; color: var(--green-deep);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0f2d1c;
+    padding: 60px 48px 36px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-weight: 900;
+    font-size: 2.5rem; color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; color: rgba(255,255,255,0.4);
+    font-size: 1rem; margin-bottom: 32px;
+  }
+  .footer-links {
+    display: flex; gap: 28px; justify-content: center; list-style: none;
+    margin-bottom: 40px;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.35); text-decoration: none;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy {
+    color: rgba(255,255,255,0.2); font-size: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 70px 20px; }
+    .about-strip { grid-template-columns: 1fr; }
+    .about-text { padding: 48px 28px; }
+    .highlights-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .info-strip { grid-template-columns: 1fr 1fr; }
+    .menu-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Yalla Yalla</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="tel:0296449990" class="nav-cta">Order Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">57 Helen St, Sefton Sydney · Est. Lebanese Flavours</span>
+    <h1 class="hero-title">
+      Yalla<br>
+      <em>Yalla</em>
+    </h1>
+    <p class="hero-subtitle">Pizzeria · Manoush · Lebanese Breakfast</p>
+    <div class="hero-info">
+      <div class="hero-info-item">
+        <span class="label">Rating</span>
+        <div class="hero-rating">
+          <span class="stars">★★★★★</span>
+          <span class="value">4.7</span>
+        </div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-info-item">
+        <span class="label">Reviews</span>
+        <span class="value">1,146+</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-info-item">
+        <span class="label">Hours Today</span>
+        <span class="value">Open till 9:30 pm</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-info-item">
+        <span class="label">Price Range</span>
+        <span class="value">$7 – $59</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Explore
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip" id="about">
+  <div class="about-text">
+    <span class="section-label">Our Story</span>
+    <h2 class="section-title">Where Sydney<br><em>meets Beirut</em></h2>
+    <p>Walk in and feel like the ocean should be behind you. The bright, welcoming resort-style setting wraps you in warmth while the aromas of fresh zaatar, wood-fired pizza, and Lebanese spices fill the air.</p>
+    <p>From our legendary Manoush boards to loaded croissants and shisha evenings — every visit is a celebration.</p>
+    <div class="about-pillars">
+      <div class="pillar">
+        <span class="p-label">Dine-in & Takeaway</span>
+        <span class="p-val">Available Daily</span>
+      </div>
+      <div class="pillar">
+        <span class="p-label">Shisha</span>
+        <span class="p-val">Evening Service</span>
+      </div>
+      <div class="pillar">
+        <span class="p-label">Outdoor Seating</span>
+        <span class="p-val">Cabana Style</span>
+      </div>
+      <div class="pillar">
+        <span class="p-label">Breakfast</span>
+        <span class="p-val">Lebanese Boards</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="pizza-icon">🍕</div>
+    <div class="about-badge">
+      <span class="big">4.7★</span>
+      <span class="sm">1,146 Reviews</span>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights">
+  <div class="inner">
+    <span class="section-label">Why We're Different</span>
+    <h2 class="section-title">A feast for<br><em>every craving</em></h2>
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <span class="h-icon">🧆</span>
+        <div class="h-title">Authentic Lebanese</div>
+        <p class="h-desc">Zaatar boards, shanklish, labneh, kafta — traditional recipes made with the finest ingredients sourced for flavour.</p>
+      </div>
+      <div class="highlight-card">
+        <span class="h-icon">🍕</span>
+        <div class="h-title">Gourmet Pizzas</div>
+        <p class="h-desc">From Garlic Chicken Potato with Lebanese toum to the fiery Fire Breathing Dragon — our pizzas are anything but ordinary.</p>
+      </div>
+      <div class="highlight-card">
+        <span class="h-icon">🥐</span>
+        <div class="h-title">Loaded Croissants</div>
+        <p class="h-desc">Freshly baked, indulgently filled. Pistachio spread with Magnum ice cream, Biscoff, Ferrero Rocher and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="inner">
+    <span class="section-label">What We Serve</span>
+    <h2 class="section-title">Our <em>Menu</em></h2>
+
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="showTab('pizzas', this)">Pizzas</button>
+      <button class="tab-btn" onclick="showTab('manoush', this)">Manoush</button>
+      <button class="tab-btn" onclick="showTab('breakfast', this)">Breakfast</button>
+      <button class="tab-btn" onclick="showTab('croissants', this)">Croissants</button>
+      <button class="tab-btn" onclick="showTab('drinks', this)">Drinks</button>
+      <button class="tab-btn" onclick="showTab('sides', this)">Sides</button>
+    </div>
+
+    <!-- PIZZAS -->
+    <div id="tab-pizzas" class="menu-panel active">
+      <div class="menu-grid" id="grid-pizzas"></div>
+    </div>
+    <!-- MANOUSH -->
+    <div id="tab-manoush" class="menu-panel">
+      <div class="menu-grid" id="grid-manoush"></div>
+    </div>
+    <!-- BREAKFAST -->
+    <div id="tab-breakfast" class="menu-panel">
+      <div class="menu-grid" id="grid-breakfast"></div>
+    </div>
+    <!-- CROISSANTS -->
+    <div id="tab-croissants" class="menu-panel">
+      <div class="menu-grid" id="grid-croissants"></div>
+    </div>
+    <!-- DRINKS -->
+    <div id="tab-drinks" class="menu-panel">
+      <div class="menu-grid" id="grid-drinks"></div>
+    </div>
+    <!-- SIDES -->
+    <div id="tab-sides" class="menu-panel">
+      <div class="menu-grid" id="grid-sides"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="inner">
+    <span class="section-label">What People Say</span>
+    <h2 class="section-title" style="color:var(--warm-white);">Loved by <em style="color:var(--gold)">Sydney</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Walking into Yalla you feel like the ocean should be behind you. The bright welcoming resort style setting is beautiful."</p>
+        <span class="review-author">Bil Y. · Local Guide</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"This place was recommended by a friend and since then I visit once a week. Quality and service is consistent every time."</p>
+        <span class="review-author">Zanzi · Local Guide</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Tried the trio and two spinach. Food was fantastic. Very clean place. Lots of seating at the back. Excellent customer service!"</p>
+        <span class="review-author">Zak · Local Guide</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip" id="visit">
+  <div class="info-block">
+    <span class="info-icon">📍</span>
+    <span class="info-label">Address</span>
+    <span class="info-value">57 Helen St, Sefton NSW 2162</span>
+  </div>
+  <div class="info-block">
+    <span class="info-icon">📞</span>
+    <span class="info-label">Phone</span>
+    <span class="info-value">(02) 9644 9990</span>
+  </div>
+  <div class="info-block">
+    <span class="info-icon">🕘</span>
+    <span class="info-label">Hours</span>
+    <span class="info-value">Open · Closes 9:30 pm</span>
+  </div>
+  <div class="info-block">
+    <span class="info-icon">🛵</span>
+    <span class="info-label">Options</span>
+    <span class="info-value">Dine-in · Takeaway · Delivery</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Yalla Yalla</div>
+  <p class="footer-tagline">Pizzeria & Lebanese Kitchen · Sefton, Sydney</p>
+  <ul class="footer-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="tel:0296449990">Call Us</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Yalla Yalla Pizzeria · 57 Helen St, Sefton NSW · All rights reserved</p>
+</footer>
+
+<script>
+const menus = {
+  pizzas: [
+    { name: "Mexicana Pizza", desc: "Pizza sauce, pepperoni, onion, olive, capsicum and jalapeño topped with chilis.", price: "$16.00", tag: "Spicy" },
+    { name: "Chicken & Garlic", desc: "Garlic sauce base with chicken and mozzarella cheese on top.", price: "$15.00" },
+    { name: "Meat Lovers Pizza", desc: "Pizza sauce or BBQ sauce, salami, pepperoni, cabanossi, and mozzarella cheese.", price: "$14.00", tag: "Popular" },
+    { name: "Margherita Pizza", desc: "Pizza sauce and mozzarella cheese.", price: "$17.00", tag: "Classic" },
+    { name: "Supreme Pizza", desc: "Pizza sauce, salami, pepperoni, cabanossi, mushroom, capsicum, onion, olive and mozzarella.", price: "$18.00" },
+    { name: "Spicy Chicken Pizza", desc: "Pizza sauce, sliced chicken, onion, capsicum, corn, and jalapeño topped with mayonnaise.", price: "$16.00", tag: "Spicy" },
+    { name: "Hawaiian Pizza", desc: "Pizza sauce, shredded beef, pineapple, and mozzarella cheese.", price: "$16.00" },
+    { name: "Prawns Pizza", desc: "Pizza sauce, marinated prawns with our special spices, roasted capsicum topped with aioli sauce.", price: "$17.00" },
+    { name: "Sausage & Vegetable Pizza", desc: "Pizza sauce, sausage, mushroom, onion, capsicum, kalamata olives, and mozzarella cheese.", price: "$16.00" },
+    { name: "BBQ Chicken & Mushroom Pizza", desc: "BBQ or pizza sauce, sliced cajun chicken, mushroom, and mozzarella cheese.", price: "$16.00", tag: "Popular" },
+    { name: "Garlic Chicken Potato Pizza", desc: "Cheese stuffed crust, succulent chicken, thinly sliced potatoes, melted cheese drizzled with authentic Lebanese toum.", price: "$18.00", tag: "Signature" },
+    { name: "Peri Peri Chicken Pizza", desc: "Peri-peri sauce, sliced chicken, shallots, roasted capsicum, oregano topped with special sauce.", price: "$16.00", tag: "Popular" },
+    { name: "Vegetarian Pizza", desc: "Pizza sauce, mushroom, onion, capsicum, Kalamata olive, and mozzarella.", price: "$15.00" },
+    { name: "Fire Breathing Dragon Pizza", desc: "Pizza sauce, salami, pepperoni, jalapeño, onion, and mozzarella cheese.", price: "$17.00", tag: "🔥 Hot" },
+    { name: "Chicken & Vegetable Pizza", desc: "BBQ, peri peri, pizza, or garlic sauce, sliced chicken, mushroom, onion, capsicum, kalamata olive, and mozzarella.", price: "$17.00" },
+  ],
+  manoush: [
+    { name: "Zaatar Pizza", desc: "Classic Lebanese zaatar flatbread.", price: "$4.00" },
+    { name: "Cheese Pizza", desc: "Classic manoush with melted cheese.", price: "$9.99" },
+    { name: "Garlic And Cheese Pizza", desc: "Garlic and cheese manoush.", price: "$11.00" },
+    { name: "Sujuk And Cheese Pizza", desc: "Turkish sausage with cheese.", price: "$12.50" },
+    { name: "Sujuk And Vegetable", desc: "Sujuk, tomato, onion, olive, capsicum, mushroom and mozzarella cheese.", price: "$15.99" },
+    { name: "Lebo Spicy Sujuk", desc: "Lebanese sausage spicy — only comes spicy.", price: "$12.50", tag: "Spicy" },
+    { name: "Labneh And Vegetable Pizza", desc: "Tomato, onion, cucumber, olive, mint, olive oil.", price: "$10.99" },
+    { name: "Kafta Pizza", desc: "Lebanese kafta on flatbread.", price: "$13.00", tag: "Signature" },
+    { name: "Hummus Pizza", desc: "Hummus pizza topped with mince meat and diced tomato with olive oil.", price: "$16.00" },
+    { name: "Double Cheese Pizza", desc: "4 types of cheese mix.", price: "$12.99" },
+    { name: "Spinach And Cheese Open", desc: "Spinach mixed with tomato and onion topped with mixed cheese.", price: "$11.00" },
+    { name: "Shanklish Corn Olive With Cheese", desc: "Shanklish mix with diced onion and tomato topped with corn, olive and cheese.", price: "$11.50" },
+    { name: "Zaatar Yalla Yalla", desc: "Half kilo of our special zaatar mix.", price: "$12.00", tag: "Namesake" },
+    { name: "Surprise", desc: "Zaatar on top. Cheese layer on the bottom. 🤫", price: "$11.00" },
+    { name: "Kaak", desc: "Mix cheese (halloumi, feta, mozzarella, parmesan).", price: "$9.00" },
+    { name: "Kaak Mix Zaatar", desc: "Mix cheese with zaatar — very nice.", price: "$9.00" },
+  ],
+  breakfast: [
+    { name: "The Little Breakfast", desc: "Cheese, labneh, green olive, tomato, mint, cucumber and 1 piece of bread.", price: "$20.00" },
+    { name: "Lebanese Breakfast Board", desc: "3 eggs, green olive, labneh, cheese, tomato, olive, cucumber, mint and 2 pieces of bread.", price: "$29.99", tag: "Popular" },
+    { name: "The Ultimate", desc: "3 eggs, zaatar, olives, shanklish, sujuk, labneh, cheese, tomato, cucumber, mint and 3 pieces of bread.", price: "$42.00", tag: "Go Big" },
+    { name: "Mega Board", desc: "5 eggs, zaatar, olives, strawberry jam, makdous, beef mortadella, shanklish, sujuk, labneh, cheese, tomato, cucumber, mint and 4 pieces of bread.", price: "$59.00", tag: "Share" },
+    { name: "Eggs Plate", desc: "3 eggs with 1 fresh bread.", price: "$9.00" },
+    { name: "Sujuk Plate", desc: "Turkish sujuk (14 pieces).", price: "$9.00" },
+    { name: "Labneh Plate", desc: "Labneh plate.", price: "$7.00" },
+    { name: "Shanklish Plate", desc: "Shanklish with tomato onion topped with olive oil.", price: "$8.00" },
+    { name: "Green Olive Plate", desc: "Fresh green olives.", price: "$7.00" },
+    { name: "Sahlab", desc: "Small sahlab — warm and comforting.", price: "$7.40" },
+  ],
+  croissants: [
+    { name: "Loaded Ferrero Rocher Croissant", desc: "Ferrero Rocher crunchy spread + classic Magnum ice cream.", price: "$16.00", tag: "Indulgent" },
+    { name: "Loaded Biscoff Croissant", desc: "Biscoff spread + Biscoff milk chocolate ice cream + crushed Biscoff biscuits.", price: "$16.00", tag: "Popular" },
+    { name: "Loaded Pistachio Croissant", desc: "Pistachio spread + white chocolate Magnum ice cream.", price: "$17.00", tag: "Signature" },
+    { name: "Loaded Raspberry Croissant", desc: "White chocolate spread + berry Magnum ice cream and freeze dried raspberry.", price: "$16.00" },
+    { name: "Loaded Kinder Bueno Croissant", desc: "Bueno spread + Magnum classic ice cream + crushed Kinder Bueno.", price: "$16.00" },
+    { name: "Loaded Classic Croissant", desc: "Nutella spread + Magnum classic ice cream.", price: "$15.00" },
+    { name: "Nutella Croissant", desc: "Freshly baked French croissant filled with Nutella.", price: "$6.00" },
+    { name: "Pistachio Croissant", desc: "Freshly baked French croissant filled with papi pistachio.", price: "$7.50" },
+    { name: "Biscoff Croissant", desc: "Freshly baked French croissant filled with Biscoff.", price: "$6.00" },
+    { name: "Cheese Croissant", desc: "Freshly baked French croissant with mixed cheese.", price: "$7.00" },
+    { name: "Biscoff And Banana", desc: "Biscoff with banana.", price: "$10.00" },
+  ],
+  drinks: [
+    { name: "Iced Latte", desc: "Chilled espresso with milk over ice.", price: "$11.00" },
+    { name: "Ice Chocolate", desc: "Cold chocolate drink.", price: "$11.00" },
+    { name: "Lemon Mint", desc: "Fresh lemon and mint — refreshing.", price: "$14.00", tag: "Favourite" },
+    { name: "Sunset Mocktail", desc: "Our special mix — passion and lychee.", price: "$15.00", tag: "Signature" },
+    { name: "V Mocktail", desc: "House mocktail.", price: "$14.00" },
+    { name: "Coffee Frappe", desc: "Iced blended coffee.", price: "$11.00" },
+    { name: "Fresh Orange Juice", desc: "Freshly squeezed.", price: "$9.00" },
+    { name: "Fresh Carrot Juice", desc: "Freshly juiced carrot.", price: "$9.00" },
+    { name: "Fresh Green Apple Juice", desc: "Freshly pressed green apple.", price: "$9.00" },
+    { name: "Chocolate Milkshake", desc: "Rich chocolate milkshake.", price: "$10.00" },
+    { name: "Oreo Milkshake", desc: "Blended Oreo milkshake.", price: "$10.00" },
+    { name: "Strawberry Milkshake", desc: "Classic strawberry shake.", price: "$10.00" },
+    { name: "Flat White", desc: "Smooth espresso with steamed milk.", price: "$5.80" },
+    { name: "Cappuccino", desc: "Espresso with frothy milk.", price: "$5.80" },
+    { name: "Latte", desc: "Espresso with steamed milk.", price: "$5.80" },
+    { name: "Long Black", desc: "Double espresso over water.", price: "$4.30" },
+    { name: "Peach Ice Tea", desc: "Refreshing peach iced tea.", price: "$9.00" },
+    { name: "Pink Lemonade", desc: "Sweet pink lemonade.", price: "$10.00" },
+  ],
+  sides: [
+    { name: "Wedges", desc: "Served with sour cream and sweet chili.", price: "$15.50", tag: "Popular" },
+    { name: "Chips", desc: "Golden chips.", price: "$7.00" },
+    { name: "Garlic Bread", desc: "Freshly baked garlic bread.", price: "$5.00" },
+    { name: "Garlic Bread & Cheese", desc: "Garlic bread topped with cheese.", price: "$6.50" },
+    { name: "Nuggets And Chips (Kids Meal)", desc: "6 piece nuggets with chips.", price: "$13.00", tag: "Kids" },
+    { name: "Nutella Pizza", desc: "Sweet Nutella pizza.", price: "$9.50" },
+  ],
+};
+
+function renderGrid(id, items) {
+  const el = document.getElementById('grid-' + id);
+  el.innerHTML = items.map(item => `
+    <div class="menu-item">
+      <div>
+        <div class="item-name">${item.name}</div>
+        ${item.desc ? `<p class="item-desc">${item.desc}</p>` : '<p class="item-desc"> </p>'}
+      </div>
+      <div class="item-footer">
+        <span class="item-price">${item.price}</span>
+        ${item.tag ? `<span class="item-tag">${item.tag}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+Object.keys(menus).forEach(k => renderGrid(k, menus[k]));
+
+function showTab(id, btn) {
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
